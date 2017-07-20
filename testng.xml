@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+  <test name="Test">
+    <classes>
+    
+       <class name="com.shopclues.scripts.BuyAProduct_TS_01"/>
+      <class name="com.shopclues.scripts.EditProfile_TS_02"/>
+      <class name="com.shopclues.scripts.AddToRemoveFromCart_TC_03"/>
+     
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->

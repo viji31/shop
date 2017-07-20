@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Failed suite [Default suite]]">
+  <test name="Default test(failed)(failed)">
+    <classes>
+      <class name="com.shopclues.scripts.BuyAProduct_TS_01">
+        <methods>
+          <include name="backUp"/>
+          <include name="preCond"/>
+          <include name="postCond"/>
+          <include name="testBuyAProduct_TS_01"/>
+        </methods>
+      </class> <!-- com.shopclues.scripts.BuyAProduct_TS_01 -->
+    </classes>
+  </test> <!-- Default test(failed)(failed) -->
+</suite> <!-- Failed suite [Failed suite [Default suite]] -->

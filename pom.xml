@@ -1,0 +1,142 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>poc</groupId>
+  <artifactId>sulekha</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>sulekha</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <testng.version>6.9.10</testng.version>
+    <selenium.version>2.53.0</selenium.version>
+    <chromedriver.version>2.53.0</chromedriver.version>
+    <safaridriver.version>2.53.0</safaridriver.version>
+    <webdrivermanager.version>1.4.3</webdrivermanager.version>
+    <mavensurefire.version>2.19</mavensurefire.version>
+    <mavencompiler.version>3.5.1</mavencompiler.version>
+    <mavensurefirereport.version>2.19</mavensurefirereport.version>
+    <allure.version>1.4.23</allure.version>
+    <aspectj.version>1.8.9</aspectj.version>
+    <alluremaven.version>2.5</alluremaven.version>
+    <mavenantrun.version>1.8</mavenantrun.version>
+    <timestamp>${maven.build.timestamp}</timestamp>
+    <maven.build.timestamp.format>yyyy_MM_dd_hh_mm_a</maven.build.timestamp.format>
+    <release.number>16-21</release.number>
+    <allure.results.directory>target/${release.number}/allure-results_${timestamp}</allure.results.directory>
+    <allure.report.directory>target/${release.number}/allure-results_${timestamp}/allure-report</allure.report.directory>
+  </properties>
+
+ <dependencies>
+    <dependency>
+        <groupId>org.seleniumhq.selenium</groupId>
+    	<artifactId>selenium-java</artifactId>
+   		<version>2.53.1</version>
+	</dependency>
+	<dependency>
+    	<groupId>org.apache.poi</groupId>
+    	<artifactId>poi-ooxml</artifactId>
+    	<version>3.16</version>
+	</dependency>
+	<dependency>
+    	<groupId>org.testng</groupId>
+    	<artifactId>testng</artifactId>
+    	<version>6.11</version>
+    	<scope>test</scope>
+	</dependency>
+	  <dependency>
+        <groupId>ru.yandex.qatools.allure</groupId>
+        <artifactId>allure-testng-adaptor</artifactId>
+        <version>1.5.3</version>
+    </dependency>
+  </dependencies>
+  <build>
+   <pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <id>create</id>
+                        <phase>compile</phase>
+                        <configuration>
+                            <target>
+                                <echo>Creating directory</echo>
+                                <mkdir dir="${allure.results.directory}" />
+                            </target>
+
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.20</version>
+                <configuration>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>testng.xml</suiteXmlFile>
+                    </suiteXmlFiles>
+                    <testFailureIgnore>false</testFailureIgnore>
+                    <argLine>
+                        -javaagent:${HOME}/.m2/repository/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar
+                    </argLine>
+                    <systemProperties>
+                        <property>
+                            <name>allure.results.directory</name>
+                            <value>${allure.results.directory}</value>
+                            <name>allure.report.directory</name> 
+                            <value>${allure.report.directory}</value>
+                        </property>
+                    </systemProperties>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>1.8.10</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.1</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </pluginManagement>
+</build>
+
+<reporting>
+    <excludeDefaults>true</excludeDefaults>
+    <plugins>
+        <plugin>
+            <groupId>ru.yandex.qatools.allure</groupId>
+            <artifactId>allure-maven-plugin</artifactId>
+            <version>2.6</version>
+            <configuration>
+                <resultsDirectory>${allure.results.directory}</resultsDirectory>
+                <inputDirectories>${allure.results.directory}</inputDirectories>
+                <reportDirectory>${allure.report.directory}</reportDirectory>
+                <reportingOutputDirectory>${allure.report.directory}</reportingOutputDirectory>
+                <failReportIfEmpty>false</failReportIfEmpty>
+            </configuration>
+        </plugin>
+    </plugins>
+</reporting>
+ 
+</project>
